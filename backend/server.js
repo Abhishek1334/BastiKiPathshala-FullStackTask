@@ -53,21 +53,19 @@ app.use((req, res, next) => {
 
 // MongoDB Connection
 const connectDB = async () => {
-    try {
-        const mongoURI =
-            process.env.MONGODB_URI ||
-            'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
+    const mongoURI =
+        process.env.MONGODB_URI ||
+        'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
 
-        console.log('Attempting to connect to MongoDB...');
-        console.log('MongoDB URI:', mongoURI.substring(0, 50) + '...');
-        
+    console.log('Attempting to connect to MongoDB...');
+    console.log('MongoDB URI:', mongoURI.substring(0, 50) + '...');
+    
+    try {
         await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+            serverSelectionTimeoutMS: 10000, // 10 seconds timeout
             socketTimeoutMS: 45000, // 45 seconds timeout
-            bufferCommands: false, // Disable buffering
-            bufferMaxEntries: 0, // Disable buffering
+            maxPoolSize: 10, // Maximum number of connections in the pool
+            minPoolSize: 1, // Minimum number of connections in the pool
         });
         
         console.log('✅ Connected to MongoDB Atlas successfully');
@@ -79,8 +77,23 @@ const connectDB = async () => {
             'Connection string used:',
             process.env.MONGODB_URI ? 'Environment variable' : 'Hardcoded fallback'
         );
-        // Exit the process if database connection fails
-        process.exit(1);
+        
+        // Try one more time after a short delay
+        console.log('🔄 Retrying connection in 3 seconds...');
+        setTimeout(async () => {
+            try {
+                await mongoose.connect(mongoURI, {
+                    serverSelectionTimeoutMS: 10000,
+                    socketTimeoutMS: 45000,
+                    maxPoolSize: 10,
+                    minPoolSize: 1,
+                });
+                console.log('✅ Reconnected to MongoDB Atlas successfully');
+            } catch (retryErr) {
+                console.error('❌ Retry failed:', retryErr);
+                process.exit(1);
+            }
+        }, 3000);
     }
 };
 
