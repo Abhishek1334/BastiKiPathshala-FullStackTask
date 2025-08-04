@@ -73,35 +73,10 @@ router.post('/register', validateRegistration, async (req, res) => {
     }
 });
 
-// GET /api/test-applicants - Test endpoint (no auth required)
-router.get('/test-applicants', async (req, res) => {
-    try {
-        console.log('Testing applicants endpoint...');
-        const count = await Applicant.countDocuments();
-        console.log('Total applicants in database:', count);
-        
-        res.json({
-            success: true,
-            count: count,
-            message: 'Test endpoint working'
-        });
-    } catch (error) {
-        console.error('Test applicants error:', error);
-        res.status(500).json({
-            error: 'Test failed',
-            details: error.message
-        });
-    }
-});
-
 // GET /api/applicants - Get all applicants (admin only)
-router.get('/applicants', async (req, res) => {
+router.get('/applicants', auth, async (req, res) => {
     try {
-        console.log('Fetching applicants...');
-        console.log('User authenticated:', req.user || 'No user (temporarily disabled auth)');
-        
         const applicants = await Applicant.find({}).select('-__v').sort({ createdAt: -1 });
-        console.log('Found applicants:', applicants.length);
 
         res.json({
             success: true,
@@ -110,14 +85,8 @@ router.get('/applicants', async (req, res) => {
         });
     } catch (error) {
         console.error('Fetch applicants error:', error);
-        console.error('Error details:', {
-            name: error.name,
-            message: error.message,
-            stack: error.stack
-        });
         res.status(500).json({
             error: 'Failed to fetch applicants',
-            details: process.env.NODE_ENV === 'development' ? error.message : undefined
         });
     }
 });
