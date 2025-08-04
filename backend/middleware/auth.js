@@ -16,6 +16,7 @@ const auth = (req, res, next) => {
         }
 
         console.log('Token found, verifying...');
+        console.log('JWT_SECRET available:', !!process.env.JWT_SECRET);
         
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

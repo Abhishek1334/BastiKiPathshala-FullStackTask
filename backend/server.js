@@ -14,7 +14,7 @@ const app = express();
 const allowedOrigins = [
     'https://bastikipathshala-nine.vercel.app',
     'http://localhost:5173',
-    'http://localhost:3000'
+    'http://localhost:3000',
 ];
 
 app.use(
@@ -22,7 +22,7 @@ app.use(
         origin: function (origin, callback) {
             // Allow requests with no origin (like mobile apps or curl requests)
             if (!origin) return callback(null, true);
-            
+
             if (allowedOrigins.indexOf(origin) !== -1) {
                 callback(null, true);
             } else {
@@ -42,9 +42,10 @@ app.use(express.urlencoded({ extended: true }));
 // MongoDB Connection
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.MONGODB_URI ||
+        const mongoURI =
+            process.env.MONGODB_URI ||
             'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
-        
+
         console.log('Attempting to connect to MongoDB...');
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
@@ -53,7 +54,10 @@ const connectDB = async () => {
         console.log('✅ Connected to MongoDB Atlas successfully');
     } catch (err) {
         console.error('❌ MongoDB connection error:', err);
-        console.error('Connection string used:', process.env.MONGODB_URI ? 'Environment variable' : 'Hardcoded fallback');
+        console.error(
+            'Connection string used:',
+            process.env.MONGODB_URI ? 'Environment variable' : 'Hardcoded fallback'
+        );
         // Don't exit the process, let it continue but log the error
     }
 };
@@ -67,20 +71,20 @@ app.use('/api', require('./routes/applicants'));
 
 // Test endpoint
 app.get('/', (req, res) => {
-    res.json({ 
+    res.json({
         message: 'Basti Ki Pathshala API is running!',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
     });
 });
 
 // Health check endpoint
 app.get('/health', (req, res) => {
     const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
-    res.json({ 
-        status: 'OK', 
+    res.json({
+        status: 'OK',
         message: 'Server is running',
         database: dbStatus,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
     });
 });
 
@@ -88,15 +92,15 @@ app.get('/health', (req, res) => {
 app.use((err, req, res, next) => {
     console.error('Error occurred:', err.message);
     console.error('Error stack:', err.stack);
-    
+
     // Handle CORS errors
     if (err.message === 'Not allowed by CORS') {
-        return res.status(403).json({ 
+        return res.status(403).json({
             error: 'CORS error: Origin not allowed',
-            origin: req.headers.origin
+            origin: req.headers.origin,
         });
     }
-    
+
     res.status(500).json({ error: 'Something went wrong!' });
 });
 
@@ -111,5 +115,7 @@ app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔗 Allowed origins: ${allowedOrigins.join(', ')}`);
+    console.log(`🔐 JWT_SECRET available: ${!!process.env.JWT_SECRET}`);
+    console.log(`🍪 COOKIE_SECRET available: ${!!process.env.COOKIE_SECRET}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
 });
