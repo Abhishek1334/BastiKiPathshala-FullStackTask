@@ -150,21 +150,6 @@ NGO/
     - View submitted applications
     - Test logout functionality
 
-## 🐛 Common Issues
-
-1. **MongoDB Connection Error**
-
-    - Check if MongoDB URI is correct
-    - Ensure internet connection
-
-2. **Port Already in Use**
-
-    - Kill existing processes on port 5000 or 5173
-    - Use different ports in .env file
-
-3. **CORS Error**
-    - Check if backend is running
-    - Verify frontend URL in CORS settings
 
 ## 📝 API Endpoints
 
@@ -179,32 +164,7 @@ NGO/
 -   `POST /api/applicants` - Submit new application
 -   `GET /api/applicants` - Get all applications (admin only)
 
-## 🔧 Development
 
-### Adding New Features
-
-1. Create new components in `frontend/src/components/`
-2. Add routes in `App.jsx`
-3. Create API endpoints in backend routes
-4. Update models if needed
-
-### Styling
-
--   Use Tailwind CSS classes
--   Follow existing design patterns
--   Keep components responsive
-
-## 📞 Support
-
-If you face any issues:
-
-1. Check the console for errors
-2. Verify all dependencies are installed
-3. Ensure environment variables are set correctly
-
-## 📄 License
-
-This project is for educational purposes.
 
 ---
 
