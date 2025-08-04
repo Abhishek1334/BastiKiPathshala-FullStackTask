@@ -15,7 +15,7 @@ app.use(
     cors({
         origin:
             process.env.NODE_ENV === 'production'
-                ? ['https://your-frontend-domain.com']
+                ? ['https://bastikipathshala-nine.vercel.app']
                 : ['http://localhost:5173'],
         credentials: true,
     })
