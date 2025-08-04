@@ -46,31 +46,31 @@ function HomePage() {
                     <div className="absolute bottom-1/3 right-1/6 w-14 h-14 border-4 border-amber-300 rounded-full"></div>
                 </div>
 
-                <div className="relative h-full flex items-center justify-center px-4">
+                <div className="relative h-full flex items-center justify-center px-4 sm:px-6">
                     <div className="text-center max-w-4xl">
-                        <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                            <Heart className="w-10 h-10 text-white" />
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg">
+                            <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                         </div>
-                        <h1 className="hero-title text-4xl md:text-6xl text-white mb-6 leading-tight">
+                        <h1 className="hero-title text-2xl sm:text-4xl md:text-6xl text-white mb-4 sm:mb-6 leading-tight">
                             Lighting the Path to <span className="text-orange-300">Change</span>
                         </h1>
-                        <p className="body-text text-xl text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        <p className="body-text text-base sm:text-xl text-gray-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4">
                             Join us in our mission to break the barriers of education in underserved
                             communities. With your support, we can provide quality education to
                             children living in slum areas, empowering them with the knowledge and
                             skills they need to build a brighter future.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
                             <Link
                                 to="/register"
-                                className="btn-primary text-lg py-4 px-8 inline-flex items-center justify-center space-x-2 shadow-lg"
+                                className="btn-primary text-base sm:text-lg py-3 sm:py-4 px-6 sm:px-8 inline-flex items-center justify-center space-x-2 shadow-lg"
                             >
                                 <span>Join Our Team</span>
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                             </Link>
                             <Link
                                 to="/register"
-                                className="border-2 border-white text-white hover:bg-white hover:text-gray-800 font-semibold py-4 px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200 body-text"
+                                className="border-2 border-white text-white hover:bg-white hover:text-gray-800 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200 body-text text-base sm:text-lg"
                             >
                                 <span>Apply as Intern</span>
                             </Link>
@@ -87,19 +87,19 @@ function HomePage() {
                     <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl"></div>
                 </div>
 
-                <div className="relative max-w-6xl mx-auto px-4">
-                    <div className="text-center mb-8">
-                        <h2 className="section-title text-3xl md:text-4xl text-gray-800 mb-4">
+                <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="text-center mb-6 sm:mb-8">
+                        <h2 className="section-title text-2xl sm:text-3xl md:text-4xl text-gray-800 mb-3 sm:mb-4">
                             Why Education is Important?
                         </h2>
-                        <p className="body-text text-lg text-gray-600 max-w-2xl mx-auto">
+                        <p className="body-text text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                             Education offers underprivileged children a pathway out of poverty by
                             providing them with the knowledge and skills necessary to secure better
                             opportunities.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         <div className="text-center p-6 rounded-lg bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-100 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
                             {/* Card Background Pattern */}
                             <div className="absolute top-0 right-0 w-20 h-20 bg-orange-200 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
@@ -165,18 +165,18 @@ function HomePage() {
                     <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-amber-300 rounded-full blur-3xl"></div>
                 </div>
 
-                <div className="relative max-w-6xl mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="section-title text-3xl md:text-4xl text-gray-800 mb-4">
+                <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+                    <div className="text-center mb-8 sm:mb-12">
+                        <h2 className="section-title text-2xl sm:text-3xl md:text-4xl text-gray-800 mb-3 sm:mb-4">
                             Our Impact in Action
                         </h2>
-                        <p className="body-text text-lg text-gray-600 max-w-2xl mx-auto">
+                        <p className="body-text text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                             See how our programs are making a real difference in the lives of
                             children and communities.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                             <img
                                 src="/images/education.jpg"
@@ -227,25 +227,25 @@ function HomePage() {
                     <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-white rounded-full blur-2xl"></div>
                 </div>
 
-                <div className="relative max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="section-title text-3xl md:text-4xl text-white mb-6">
+                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+                    <h2 className="section-title text-2xl sm:text-3xl md:text-4xl text-white mb-4 sm:mb-6">
                         Ready to Make a Difference?
                     </h2>
-                    <p className="body-text text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                    <p className="body-text text-base sm:text-xl text-orange-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
                         Join our team of dedicated volunteers and interns. Your skills and passion
                         can help us create lasting change in communities.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
                         <Link
                             to="/register"
-                            className="bg-white text-orange-600 hover:bg-orange-50 font-semibold py-4 px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200 shadow-lg"
+                            className="bg-white text-orange-600 hover:bg-orange-50 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200 shadow-lg text-base sm:text-lg"
                         >
                             <span>Apply Now</span>
-                            <ArrowRight className="w-5 h-5" />
+                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                         </Link>
                         <Link
                             to="/register"
-                            className="border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold py-4 px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200"
+                            className="border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg inline-flex items-center justify-center space-x-2 transition-colors duration-200 text-base sm:text-lg"
                         >
                             <span>Learn More</span>
                         </Link>

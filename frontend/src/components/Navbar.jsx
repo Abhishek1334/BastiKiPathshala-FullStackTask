@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, UserPlus, Shield, LogOut, Heart } from 'lucide-react';
+import { Home, UserPlus, Shield, LogOut, Heart, Menu, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
 
@@ -7,6 +7,7 @@ const Navbar = () => {
     const location = useLocation();
     const { logout } = useAuth();
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const isActive = (path) => location.pathname === path;
 
@@ -116,14 +117,72 @@ const Navbar = () => {
                     {/* Mobile Menu Button */}
                     <div className="md:hidden">
                         <button
-                            onClick={handleLogout}
-                            className="flex items-center space-x-2 px-3 py-2 rounded-lg text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors duration-200"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                                isScrolled
+                                    ? 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                                    : 'text-white hover:text-orange-300 hover:bg-white/30 drop-shadow-lg'
+                            }`}
                         >
-                            <LogOut className="w-4 h-4" />
-                            <span>Logout</span>
+                            {isMobileMenuOpen ? (
+                                <X className="w-5 h-5" />
+                            ) : (
+                                <Menu className="w-5 h-5" />
+                            )}
                         </button>
                     </div>
                 </div>
+
+                {/* Mobile Menu */}
+                {isMobileMenuOpen && (
+                    <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-orange-100 py-4">
+                        <div className="space-y-2">
+                            <Link
+                                to="/"
+                                className={`flex items-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 body-text ${
+                                    isActive('/')
+                                        ? 'text-orange-600 bg-orange-50'
+                                        : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <Home className="w-4 h-4" />
+                                <span>Home</span>
+                            </Link>
+                            <Link
+                                to="/register"
+                                className={`flex items-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 body-text ${
+                                    isActive('/register')
+                                        ? 'text-orange-600 bg-orange-50'
+                                        : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <UserPlus className="w-4 h-4" />
+                                <span>Join Us</span>
+                            </Link>
+                            <Link
+                                to="/admin"
+                                className={`flex items-center space-x-2 px-4 py-3 rounded-lg transition-all duration-200 body-text ${
+                                    isActive('/admin')
+                                        ? 'text-orange-600 bg-orange-50'
+                                        : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <Shield className="w-4 h-4" />
+                                <span>Admin</span>
+                            </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="flex items-center space-x-2 px-4 py-3 rounded-lg text-red-600 hover:text-red-700 hover:bg-red-50 transition-colors duration-200 w-full text-left"
+                            >
+                                <LogOut className="w-4 h-4" />
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </nav>
     );

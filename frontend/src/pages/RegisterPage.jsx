@@ -74,13 +74,13 @@ function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-28">
-            <div className="max-w-7xl mx-auto px-4">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-20 sm:py-28">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start lg:items-center">
                     {/* Form Section */}
-                    <div className="bg-white rounded-2xl shadow-xl p-8 border border-orange-100">
-                        <div className="text-center mb-8">
-                            <h1 className="section-title text-3xl text-gray-800 mb-4">
+                    <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-orange-100">
+                        <div className="text-center mb-6 sm:mb-8">
+                            <h1 className="section-title text-2xl sm:text-3xl text-gray-800 mb-3 sm:mb-4">
                                 Join Our Mission
                             </h1>
                             <p className="body-text text-gray-600">
@@ -104,7 +104,7 @@ function RegisterPage() {
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                             <div>
                                 <label
                                     htmlFor="name"
@@ -210,7 +210,7 @@ function RegisterPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="btn-primary w-full py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="btn-primary w-full py-3 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isLoading ? 'Submitting...' : 'Submit Application'}
                             </button>
@@ -218,19 +218,19 @@ function RegisterPage() {
                     </div>
 
                     {/* Info Section */}
-                    <div className="space-y-8">
+                    <div className="space-y-6 sm:space-y-8">
                         <div className="text-center lg:text-left">
-                            <h2 className="section-title text-4xl text-gray-800 mb-6">
+                            <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl text-gray-800 mb-4 sm:mb-6">
                                 Make a Real Impact
                             </h2>
-                            <p className="body-text text-lg text-gray-600 mb-8">
+                            <p className="body-text text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
                                 Join our team of dedicated volunteers and interns who are committed
                                 to providing quality education to underprivileged children. Your
                                 skills and passion can help us create lasting change in communities.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                             <div className="bg-white rounded-xl p-6 shadow-lg border border-orange-100">
                                 <h3 className="section-title text-xl text-gray-800 mb-3">
                                     Internship Program

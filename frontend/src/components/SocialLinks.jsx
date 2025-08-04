@@ -53,16 +53,18 @@ const SocialLinks = () => {
         <div className="fixed top-4 right-4 z-50 social-dropdown">
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center justify-center w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-white hover:shadow-xl transition-all duration-200"
+                className="flex items-center justify-center w-6 h-6 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-white hover:shadow-xl transition-all duration-200"
             >
-                <MoreVertical className="w-5 h-5 text-gray-700" />
+                <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2">
-                    <div className="px-4 py-2 border-b border-gray-100">
-                        <p className="text-sm font-medium text-gray-700">Abhishek Rajoria</p>
+                <div className="absolute right-0 mt-2 w-48 sm:w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2">
+                    <div className="px-3 sm:px-4 py-2 border-b border-gray-100">
+                        <p className="text-xs sm:text-sm font-medium text-gray-700">
+                            Abhishek Rajoria
+                        </p>
                         <p className="text-xs text-gray-500">Full Stack Developer</p>
                     </div>
                     {socialLinks.map((link, index) => {
@@ -73,10 +75,10 @@ const SocialLinks = () => {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
+                                className="flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-200"
                                 onClick={() => setIsDropdownOpen(false)}
                             >
-                                <IconComponent className={`w-4 h-4 ${link.color}`} />
+                                <IconComponent className={`w-3 h-3 sm:w-4 sm:h-4 ${link.color}`} />
                                 <span>{link.name}</span>
                             </a>
                         );

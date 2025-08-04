@@ -97,13 +97,13 @@ const AdminPage = () => {
     // Show login form if not authenticated
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center py-8">
+            <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center py-8 px-4">
                 <div className="max-w-md w-full mx-auto">
-                    <div className="bg-white rounded-2xl shadow-xl p-8 border border-orange-100">
-                        <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-orange-100">
+                        <div className="text-center mb-6 sm:mb-8">
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                                 <svg
-                                    className="w-8 h-8 text-white"
+                                    className="w-6 h-6 sm:w-8 sm:h-8 text-white"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -116,7 +116,7 @@ const AdminPage = () => {
                                     />
                                 </svg>
                             </div>
-                            <h1 className="section-title text-2xl text-gray-800 mb-2">
+                            <h1 className="section-title text-xl sm:text-2xl text-gray-800 mb-2">
                                 Admin Access
                             </h1>
                             <p className="body-text text-gray-600">
@@ -130,7 +130,7 @@ const AdminPage = () => {
                             </div>
                         )}
 
-                        <form onSubmit={handleLogin} className="space-y-6">
+                        <form onSubmit={handleLogin} className="space-y-4 sm:space-y-6">
                             {/* Hidden username field for accessibility */}
                             <input
                                 type="text"
@@ -203,7 +203,7 @@ const AdminPage = () => {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="btn-primary w-full py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="btn-primary w-full py-3 text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isLoading ? 'Signing In...' : 'Sign In'}
                             </button>
@@ -216,13 +216,13 @@ const AdminPage = () => {
 
     // Show admin dashboard if authenticated
     return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-28">
-            <div className="max-w-7xl mx-auto px-4">
+        <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-20 sm:py-28">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 {/* Header */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 border border-orange-100 mb-8">
+                <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-orange-100 mb-6 sm:mb-8">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div>
-                            <h1 className="section-title text-3xl text-gray-800 mb-2">
+                            <h1 className="section-title text-2xl sm:text-3xl text-gray-800 mb-2">
                                 Admin Dashboard
                             </h1>
                             <p className="body-text text-gray-600">
@@ -231,7 +231,7 @@ const AdminPage = () => {
                         </div>
                         <button
                             onClick={handleLogout}
-                            className="mt-4 md:mt-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+                            className="mt-4 md:mt-0 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base"
                         >
                             Logout
                         </button>
@@ -239,7 +239,7 @@ const AdminPage = () => {
                 </div>
 
                 {/* Stats Cards */}
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <div className="bg-white rounded-xl p-6 shadow-lg border border-orange-100">
                         <div className="flex items-center">
                             <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4">
@@ -323,8 +323,8 @@ const AdminPage = () => {
 
                 {/* Applications Table */}
                 <div className="bg-white rounded-2xl shadow-xl border border-orange-100 overflow-hidden">
-                    <div className="px-8 py-6 border-b border-gray-200">
-                        <h2 className="section-title text-2xl text-gray-800">
+                    <div className="px-4 sm:px-8 py-4 sm:py-6 border-b border-gray-200">
+                        <h2 className="section-title text-xl sm:text-2xl text-gray-800">
                             Recent Applications
                         </h2>
                     </div>
