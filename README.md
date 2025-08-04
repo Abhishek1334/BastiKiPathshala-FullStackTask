@@ -164,8 +164,4 @@ NGO/
 -   `POST /api/applicants` - Submit new application
 -   `GET /api/applicants` - Get all applications (admin only)
 
-
-
 ---
-
-**Note**: This is a demo project. In production, use proper security measures and environment variables.

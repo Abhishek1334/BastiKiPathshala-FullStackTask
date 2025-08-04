@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import Navbar from './components/Navbar';
+import SocialLinks from './components/SocialLinks';
 import ErrorBoundary from './components/ErrorBoundary';
 import { AuthProvider } from './context/AuthContext';
 
@@ -14,6 +15,7 @@ function App() {
             <AuthProvider>
                 <div className="min-h-screen">
                     <Navbar />
+                    <SocialLinks />
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/register" element={<RegisterPage />} />
