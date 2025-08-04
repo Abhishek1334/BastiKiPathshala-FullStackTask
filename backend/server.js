@@ -39,6 +39,18 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Database connection check middleware
+app.use((req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {
+        console.log('Database not connected. Ready state:', mongoose.connection.readyState);
+        return res.status(503).json({
+            error: 'Database connection not available',
+            readyState: mongoose.connection.readyState
+        });
+    }
+    next();
+});
+
 // MongoDB Connection
 const connectDB = async () => {
     try {
@@ -47,23 +59,50 @@ const connectDB = async () => {
             'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
 
         console.log('Attempting to connect to MongoDB...');
+        console.log('MongoDB URI:', mongoURI.substring(0, 50) + '...');
+        
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000, // 5 seconds timeout
+            socketTimeoutMS: 45000, // 45 seconds timeout
+            bufferCommands: false, // Disable buffering
+            bufferMaxEntries: 0, // Disable buffering
         });
+        
         console.log('✅ Connected to MongoDB Atlas successfully');
+        console.log('Database name:', mongoose.connection.name);
+        console.log('Connection state:', mongoose.connection.readyState);
     } catch (err) {
         console.error('❌ MongoDB connection error:', err);
         console.error(
             'Connection string used:',
             process.env.MONGODB_URI ? 'Environment variable' : 'Hardcoded fallback'
         );
-        // Don't exit the process, let it continue but log the error
+        // Exit the process if database connection fails
+        process.exit(1);
     }
 };
 
 // connect to database
 connectDB();
+
+// MongoDB connection event listeners
+mongoose.connection.on('connected', () => {
+    console.log('🎉 Mongoose connected to MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.error('❌ Mongoose connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('⚠️ Mongoose disconnected from MongoDB');
+});
+
+mongoose.connection.on('reconnected', () => {
+    console.log('🔄 Mongoose reconnected to MongoDB');
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -83,7 +122,12 @@ app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
         message: 'Server is running',
-        database: dbStatus,
+        database: {
+            status: dbStatus,
+            readyState: mongoose.connection.readyState,
+            name: mongoose.connection.name,
+            host: mongoose.connection.host
+        },
         timestamp: new Date().toISOString(),
     });
 });
