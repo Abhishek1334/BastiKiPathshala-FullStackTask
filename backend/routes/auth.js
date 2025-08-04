@@ -47,7 +47,7 @@ router.post('/login', validateLogin, async (req, res) => {
         res.cookie('adminToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-            sameSite: 'strict',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 24 * 60 * 60 * 1000, // 24 hours
             path: '/',
         });
@@ -74,7 +74,7 @@ router.post('/logout', auth, async (req, res) => {
         res.clearCookie('adminToken', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             path: '/',
         });
 
@@ -90,8 +90,49 @@ router.post('/logout', auth, async (req, res) => {
     }
 });
 
-// GET /api/auth/verify - Verify authentication status
-router.get('/verify', auth, async (req, res) => {
+// GET /api/auth/verify - Verify authentication status (public endpoint)
+router.get('/verify', async (req, res) => {
+    try {
+        // Get token from cookie
+        const token = req.cookies.adminToken;
+
+        if (!token) {
+            return res.json({
+                success: true,
+                authenticated: false,
+                user: null,
+            });
+        }
+
+        // Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Check if token is for admin
+        if (decoded.role !== 'admin') {
+            return res.json({
+                success: true,
+                authenticated: false,
+                user: null,
+            });
+        }
+
+        res.json({
+            success: true,
+            authenticated: true,
+            user: decoded,
+        });
+    } catch (error) {
+        // If token is invalid or expired, return not authenticated
+        res.json({
+            success: true,
+            authenticated: false,
+            user: null,
+        });
+    }
+});
+
+// GET /api/auth/verify - Verify authentication status (protected endpoint)
+router.get('/verify-protected', auth, async (req, res) => {
     try {
         res.json({
             success: true,

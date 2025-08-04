@@ -146,6 +146,7 @@ const AdminPage = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         className="input-field pr-10"
                                         placeholder="Enter admin password"
+                                        autoComplete="new-password"
                                         required
                                     />
                                     <button
