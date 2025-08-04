@@ -55,17 +55,19 @@ app.use((req, res, next) => {
 const connectDB = async () => {
     const mongoURI =
         process.env.MONGODB_URI ||
-        'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
+        'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject&ssl=true&authSource=admin';
 
     console.log('Attempting to connect to MongoDB...');
     console.log('MongoDB URI:', mongoURI.substring(0, 50) + '...');
     
     try {
         await mongoose.connect(mongoURI, {
-            serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+            serverSelectionTimeoutMS: 30000, // 30 seconds timeout
             socketTimeoutMS: 45000, // 45 seconds timeout
             maxPoolSize: 10, // Maximum number of connections in the pool
             minPoolSize: 1, // Minimum number of connections in the pool
+            ssl: true,
+            sslValidate: false, // Disable SSL certificate validation for development
         });
         
         console.log('✅ Connected to MongoDB Atlas successfully');
@@ -83,10 +85,12 @@ const connectDB = async () => {
         setTimeout(async () => {
             try {
                 await mongoose.connect(mongoURI, {
-                    serverSelectionTimeoutMS: 10000,
+                    serverSelectionTimeoutMS: 30000,
                     socketTimeoutMS: 45000,
                     maxPoolSize: 10,
                     minPoolSize: 1,
+                    ssl: true,
+                    sslValidate: false,
                 });
                 console.log('✅ Reconnected to MongoDB Atlas successfully');
             } catch (retryErr) {
