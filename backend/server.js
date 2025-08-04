@@ -27,17 +27,19 @@ app.use(express.urlencoded({ extended: true }));
 // MongoDB Connection
 const connectDB = async () => {
     try {
-        await mongoose.connect(
-            process.env.MONGODB_URI ||
-                'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject',
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            }
-        );
-        console.log('Connected to MongoDB Atlas');
+        const mongoURI = process.env.MONGODB_URI ||
+            'mongodb+srv://abhishek1334code:odmBonWo41a3xIs8@ngoproject.x6ucfnp.mongodb.net/?retryWrites=true&w=majority&appName=NGOProject';
+        
+        console.log('Attempting to connect to MongoDB...');
+        await mongoose.connect(mongoURI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('✅ Connected to MongoDB Atlas successfully');
     } catch (err) {
-        console.error('MongoDB connection error:', err);
+        console.error('❌ MongoDB connection error:', err);
+        console.error('Connection string used:', process.env.MONGODB_URI ? 'Environment variable' : 'Hardcoded fallback');
+        // Don't exit the process, let it continue but log the error
     }
 };
 
@@ -50,7 +52,13 @@ app.use('/api', require('./routes/applicants'));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    res.json({ status: 'OK', message: 'Server is running' });
+    const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    res.json({ 
+        status: 'OK', 
+        message: 'Server is running',
+        database: dbStatus,
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Error handling middleware
