@@ -131,6 +131,13 @@ const AdminPage = () => {
                         )}
 
                         <form onSubmit={handleLogin} className="space-y-6">
+                            {/* Hidden username field for accessibility */}
+                            <input
+                                type="text"
+                                name="username"
+                                autoComplete="username"
+                                style={{ display: 'none' }}
+                            />
                             <div>
                                 <label
                                     htmlFor="password"
