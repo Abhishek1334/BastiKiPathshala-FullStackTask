@@ -50,7 +50,7 @@ const SocialLinks = () => {
     }, [isDropdownOpen]);
 
     return (
-        <div className="fixed top-4 right-4 z-50 social-dropdown">
+        <div className="fixed top-4 right-4 z-50 social-dropdown hidden lg:block">
             <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center justify-center w-6 h-6 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-white hover:shadow-xl transition-all duration-200"
