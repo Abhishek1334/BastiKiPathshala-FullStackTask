@@ -120,7 +120,7 @@ const AdminPage = () => {
                                 Admin Access
                             </h1>
                             <p className="body-text text-gray-600">
-                                Enter password to access admin panel (password : admin123)
+                                Enter password to access admin panel 
                             </p>
                         </div>
 
@@ -152,7 +152,7 @@ const AdminPage = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         className="input-field pr-10"
-                                        placeholder="Enter admin password"
+                                        placeholder="Enter admin password : admin123"
                                         autoComplete="new-password"
                                         required
                                     />
