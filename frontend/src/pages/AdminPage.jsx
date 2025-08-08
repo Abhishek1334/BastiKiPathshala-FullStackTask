@@ -120,7 +120,7 @@ const AdminPage = () => {
                                 Admin Access
                             </h1>
                             <p className="body-text text-gray-600">
-                                Enter password to access admin panel
+                                Enter password to access admin panel (password : admin123)
                             </p>
                         </div>
 
